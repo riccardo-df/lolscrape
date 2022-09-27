@@ -1,22 +1,31 @@
-#' Scraping Summoners in a Given Tier
+#' Scraping Summoners in a Given Rank and Tier
 #'
-#' Scrapes all the summoners belonging to a given tier.
+#' Scrapes all the summoners belonging to a given rank and tier.
 #'
-#' @param region Region where summoners are playing. One in \code{c("br1", "eun1", "euw1", "jp1", "kr", "la1", "la2", "na1", "oc1", "ru", "tr1")}.
-#' @param queue Queue type. One in \code{c("RANKED_SOLO_5x5", "RANKED_TFT", "RANKED_FLEX_SR", "RANKED_FLEX_TT")}.
-#' @param tier Tier. One in \code{c("CHALLENGER", "GRANDMASTER", "MASTER", "DIAMOND", "PLATINUM", "GOLD", "SILVER", "BRONZE", "IRON")}.
-#' @param rank Rank. One in \code{c("I", "II", "III", "IV")}.
+#' @param region Region where summoners are playing.
+#' @param queue Queue type.
+#' @param tier Tier.
+#' @param rank Rank.
 #' @param api_key Your API key. It should be of the format \code{"RGAPI-xxxx"}.
 #' @param min Wait for a random amount of seconds bounded from below by \code{min} before scraping next item.
 #' @param max Wait for a random amount of seconds bounded from above by \code{max} before scraping next item.
 #'
 #' @details
-#' \code{get_players_in_tier} returns, among others, all the names of the summoners in a given tier and rank. Then, one can
+#' \code{get_players_in_tier} returns, among others, all the summoners' names in a given tier and rank. Then, one can
 #' use \code{\link{get_match_info}} to scrape all the matches of a given summoner, ideally looping over all the names here
 #' obtained.\cr
 #'
+#' The following are the valid values for the inputs:
+#' \describe{
+#'   \item{\code{region}}{\code{"br1"}, \code{"eun1"}, \code{"euw1"}, \code{"jp1"}, \code{"kr"}, \code{"la1"}, \code{"la2"}, \code{"na1"}, \code{"oc1"}, \code{"ru"}, \code{"tr1"}}
+#'   \item{\code{queue}}{\code{"RANKED_SOLO_5x5"}, \code{"RANKED_TFT"}, \code{"RANKED_FLEX_SR"}, \code{"RANKED_FLEX_TT"}}
+#'   \item{\code{tier}}{\code{"CHALLENGER"}, \code{"GRANDMASTER"}, \code{"MASTER"}, \code{"DIAMOND"}, \code{"PLATINUM"}, \code{"GOLD"}, \code{"SILVER"}, \code{"BRONZE"}, \code{"IRON"}}
+#'   \item{\code{rank}}{\code{"I"}, \code{"II"}, \code{"III"}, \code{"IV"}}
+#' }
+#'
 #' To get an API key, it is sufficient to have a Riot account of at least level 5 and visit
-#' https://developer.riotgames.com/. Once logged in, you can generate your key from your dashboard.\cr
+#' \href{https://developer.riotgames.com/}{https://developer.riotgames.com/}. Once logged in,
+#' you can generate a key from your dashboard.\cr
 #'
 #' Imposing a waiting time between each item scraped is useful to avoid hitting the rate limits imposed by Riot.
 #' With a personal API key, it is not possible to get more than 20 requests every 1 second and 100 requests every 2 minutes.
@@ -38,7 +47,7 @@
 #'   \item{\code{inactive}}{Whether the summoner is inactive.}
 #'
 #' For more details on these variables, please refer to the Riot's official documentation:
-#' https://developer.riotgames.com/apis#league-exp-v4/GET_getLeagueEntries.
+#' \href{https://developer.riotgames.com/apis#league-exp-v4/GET_getLeagueEntries}{https://developer.riotgames.com/apis#league-exp-v4/GET_getLeagueEntries}.
 #'
 #' @import dplyr httr jsonlite
 #'

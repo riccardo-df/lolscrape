@@ -7,9 +7,9 @@
 get_match_info(region, summoner_name, api_key, min = 0, max = 0)
 }
 \arguments{
-\item{region}{Region where summoners are playing One in \code{c("br1", "eun1", "euw1", "jp1", "kr", "la1", "la2", "na1", "oc1", "ru", "tr1")}.}
+\item{region}{Region where summoners are playing.}
 
-\item{summoner_name}{The name of the summoner.}
+\item{summoner_name}{The summoner's name.}
 
 \item{api_key}{Your API key. It should be of the format \code{"RGAPI-xxxx"}.}
 
@@ -41,19 +41,25 @@ A data frame with the following variables:
   \item{\code{bans}}{Champions banned for a given game.}
 
 For more details on these variables, please refer to the Riot's official documentation:
-https://developer.riotgames.com/apis#summoner-v4/GET_getBySummonerName,
-https://developer.riotgames.com/apis#match-v5/GET_getMatchIdsByPUUID, and
-https://developer.riotgames.com/apis#match-v5/GET_getMatch.
+\href{https://developer.riotgames.com/apis#summoner-v4/GET_getBySummonerName}{https://developer.riotgames.com/apis#summoner-v4/GET_getBySummonerName},
+\href{https://developer.riotgames.com/apis#match-v5/GET_getMatchIdsByPUUID}{https://developer.riotgames.com/apis#match-v5/GET_getMatchIdsByPUUID}, and
+\href{https://developer.riotgames.com/apis#match-v5/GET_getMatch}{https://developer.riotgames.com/apis#match-v5/GET_getMatch}.
 }
 \description{
 Scrapes matches of a given summoner.
 }
 \details{
 \code{get_match_info} returns detailed information about the recent matches of \code{summoner_name}. It can be used
-in a for loop to iterate over several summoners.
+in a for loop to iterate over several summoners.\cr
+
+The following are the valid values for the inputs:
+\describe{
+  \item{\code{region}}{\code{"br1"}, \code{"eun1"}, \code{"euw1"}, \code{"jp1"}, \code{"kr"}, \code{"la1"}, \code{"la2"}, \code{"na1"}, \code{"oc1"}, \code{"ru"}, \code{"tr1"}}
+}
 
 To get an API key, it is sufficient to have a Riot account of at least level 5 and visit
-https://developer.riotgames.com/. Once logged in, you can generate your key from your dashboard.\cr
+\href{https://developer.riotgames.com/}{https://developer.riotgames.com/}. Once logged in,
+you can generate a key from your dashboard.\cr
 
 Imposing a waiting time between each item scraped is useful to avoid hitting the rate limits imposed by Riot.
 With a personal API key, it is not possible to get more than 20 requests every 1 second and 100 requests every 2 minutes.
