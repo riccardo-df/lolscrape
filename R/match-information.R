@@ -91,7 +91,7 @@ get_match_info <- function(region, match_id, api_key,
   game_mode <- match_data$info$gameMode
   game_type <- match_data$info$gameType
 
-  if (game_mode != "CLASSIC" | queue_id != 420) return(NULL)
+  if (queue_id != 420 | game_mode != "CLASSIC" | game_mode != "MATCHED_GAME") return(NULL)
 
   # Participants.
   participant_name <- match_data$info$participants$summonerName
