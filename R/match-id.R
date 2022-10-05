@@ -26,7 +26,7 @@
 #'
 #' @author Riccardo Di Francesco
 #'
-#' @seealso \code{\link{get_players_in_tier}}
+#' @seealso \code{\link{get_players_in_tier}}, \code{\link{get_match_info}}
 #'
 #' @export
 get_match_ids <- function(region, summoner_name, api_key) {

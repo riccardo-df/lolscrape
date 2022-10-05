@@ -59,7 +59,7 @@
 #'
 #' @author Riccardo Di Francesco
 #'
-#' @seealso \code{\link{get_players_in_tier}}
+#' @seealso \code{\link{get_players_in_tier}}, \code{\link{get_match_ids}}
 #'
 #' @export
 get_match_info <- function(region, match_id, api_key,
@@ -70,6 +70,8 @@ get_match_info <- function(region, match_id, api_key,
   if (!is.character(api_key)) stop("'api_key' must be a charachter.", call. = FALSE)
 
   if (region == "euw1") region_adjusted = "europe" ## RECODE ALSO OTHER REGIONS.
+
+  sleep(min, max)
 
   ## Get match data.
   base_url_match <- paste("https://", ".api.riotgames.com/lol/match/v5/matches", sep = region_adjusted)

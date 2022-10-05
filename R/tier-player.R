@@ -51,7 +51,7 @@
 #'
 #' @author Riccardo Di Francesco
 #'
-#' @seealso \code{\link{get_match_info}}
+#' @seealso \code{\link{get_match_ids}}, \code{\link{get_match_info}}
 #'
 #' @export
 get_players_in_tier <- function(region, queue, tier, rank, api_key) {
