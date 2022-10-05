@@ -7,13 +7,11 @@
 #' @param tier Tier.
 #' @param rank Rank.
 #' @param api_key Your API key. It should be of the format \code{"RGAPI-xxxx"}.
-#' @param min Wait for a random amount of seconds bounded from below by \code{min} before scraping next item.
-#' @param max Wait for a random amount of seconds bounded from above by \code{max} before scraping next item.
 #'
 #' @details
 #' \code{get_players_in_tier} returns, among others, all the summoners' names in a given tier and rank. Then, one can
-#' use \code{\link{get_match_info}} to scrape all the matches of a given summoner, ideally looping over all the names here
-#' obtained.\cr
+#' use \code{\link{get_match_ids}} and \code{\link{get_match_info}} to scrape all the matches of a given summoner,
+#' ideally looping over all the names here obtained.\cr
 #'
 #' The following are the valid values for the inputs:
 #' \describe{
@@ -56,8 +54,7 @@
 #' @seealso \code{\link{get_match_info}}
 #'
 #' @export
-get_players_in_tier <- function(region, queue, tier, rank, api_key,
-                                min = 0, max = 0) {
+get_players_in_tier <- function(region, queue, tier, rank, api_key) {
   ## Checking inputs.
   if (!(region %in% c("br1", "eun1", "euw1", "jp1", "kr", "la1", "la2", "na1", "oc1", "ru", "tr1"))) stop("Invalid 'region'. Check the documentation for valid values.", call. = FALSE)
   if (!(queue %in% c("RANKED_SOLO_5x5", "RANKED_TFT", "RANKED_FLEX_SR", "RANKED_FLEX_TT"))) stop("Invalid 'queue'. Check the documentation for valid values.", call. = FALSE)
@@ -65,25 +62,24 @@ get_players_in_tier <- function(region, queue, tier, rank, api_key,
   if (!(rank %in% c("I", "II", "III", "IV"))) stop("Invalid 'tier'. Check the documentation for valid values.", call. = FALSE)
   if (!is.character(api_key)) stop("'api_key' must be a charachter.")
 
-  ## Getting all summoners for desired rank. We need to iterate across several pages.
+  ## Get all summoners for given rank and tier.
+  # We do not know how many pages. Iterate across several pages and stop if the last page is empty.
   base_url <- paste("https://", ".api.riotgames.com/lol/league-exp/v4/entries", sep = region)
   url <- paste(base_url, queue, tier, rank, sep = "/")
 
   out <- list()
   counter <- 1
+
   for (i in seq_len(10000000L)) {
-    sleep(min = min, max = max)
-
-    cat(paste0("Fetching page ",i,"\n"))
-
     page <- i
     url_page <- paste(url, page, sep = "?page=")
     url_page_key <- paste(url_page, api_key, sep = "&api_key=")
 
     summoners <- httr::GET(url_page_key)
+    if (summoners$status_code == 403) stop("Your API key in invalid.", call. = FALSE)
     temp_dta <- jsonlite::fromJSON(rawToChar(summoners$content))
 
-    if (is.null(dim(temp_dta)[1])) break # Stop if the last page is empty.
+    if (is.null(dim(temp_dta)[1])) break
 
     out[[counter]] <- temp_dta[, -c(12:13)]
     counter <- counter + 1

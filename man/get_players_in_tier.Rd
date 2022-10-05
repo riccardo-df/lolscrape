@@ -4,7 +4,7 @@
 \alias{get_players_in_tier}
 \title{Scraping Summoners in a Given Rank and Tier}
 \usage{
-get_players_in_tier(region, queue, tier, rank, api_key, min = 0, max = 0)
+get_players_in_tier(region, queue, tier, rank, api_key)
 }
 \arguments{
 \item{region}{Region where summoners are playing.}
@@ -16,10 +16,6 @@ get_players_in_tier(region, queue, tier, rank, api_key, min = 0, max = 0)
 \item{rank}{Rank.}
 
 \item{api_key}{Your API key. It should be of the format \code{"RGAPI-xxxx"}.}
-
-\item{min}{Wait for a random amount of seconds bounded from below by \code{min} before scraping next item.}
-
-\item{max}{Wait for a random amount of seconds bounded from above by \code{max} before scraping next item.}
 }
 \value{
 A data frame with the following variables:
@@ -43,8 +39,8 @@ Scrapes all the summoners belonging to a given rank and tier.
 }
 \details{
 \code{get_players_in_tier} returns, among others, all the summoners' names in a given tier and rank. Then, one can
-use \code{\link{get_match_info}} to scrape all the matches of a given summoner, ideally looping over all the names here
-obtained.\cr
+use \code{\link{get_match_ids}} and \code{\link{get_match_info}} to scrape all the matches of a given summoner,
+ideally looping over all the names here obtained.\cr
 
 The following are the valid values for the inputs:
 \describe{
