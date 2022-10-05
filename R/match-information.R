@@ -91,33 +91,35 @@ get_match_info <- function(region, match_id, api_key,
   game_mode <- match_data$info$gameMode
   game_type <- match_data$info$gameType
 
+  if (game_mode != "CLASSIC" | queue_id != 420) return(NULL)
+
   # Participants.
   participant_name <- match_data$info$participants$summonerName
   participant_id <- match_data$info$participants$summonerId
   participant_puiid <- match_data$info$participants$puuid
   participant_level <- match_data$info$participants$summonerLevel
 
+  if (length(participant_name) != 10 | length(participant_id) != 10 |
+      length(participant_puiid) != 10 | length(participant_level) != 10) return(NULL)
+
   champion <- match_data$info$participants$championName
   bans <- c(match_data$info$teams$bans[[1]]$championId, match_data$info$teams$bans[[2]]$championId)
   position <- match_data$info$participants$teamPosition
+
+  if (length(champion) != 10 |length(bans) != 10 | length(position) != 10) return(NULL)
 
   kills <- match_data$info$participants$kills
   assists <- match_data$info$participants$assists
   deaths <- match_data$info$participants$deaths
   gold <- match_data$info$participants$goldEarned
 
+  if (length(kills) != 10 | length(assists) != 10 | length(deaths) != 10 | length(gold) != 10) return(NULL)
+
   early_surrender <- match_data$info$participants$gameEndedInEarlySurrender
   surrender <- match_data$info$participants$gameEndedInSurrender
   win <- match_data$info$participants$win
 
-  # Return NULL if not what we want.
-  if (game_mode != "CLASSIC" | queue_id != 420 | length(participant_name) != 10 | length(participant_id) != 10 |
-      length(participant_puiid) != 10 | length(participant_level) != 10 | length(champion) != 10 |
-      length(bans) != 10 | length(position) != 10 | length(kills) != 10 | length(assists) != 10 |
-      length(deaths) != 10 | length(gold) != 10 | length(early_surrender) != 10 | length(surrender) != 10 |
-      length(win) != 10) {
-    return(NULL)
-  }
+  if (length(early_surrender) != 10 | length(surrender) != 10 |length(win) != 10) return(NULL)
 
   ## Output.
   out <- data.frame("match_id" = match_id, "when" = when, "duration" = duration,
