@@ -57,5 +57,5 @@ results <- dplyr::bind_rows(raw_results)
 ```
 
 In the section `Scrape players`, I use `get_players_in_tier` to pull nicknames (and other information) about all the players that are currently in the specified
-server (here, challenger solo/duo queue hosted on the european server). Then, In the section `Scrape matches`, I loop over all these nicknames to extract information about their most recent matches (approximately up to two years prior running the code). `get_match_ids` pulls the ids of these matches, and `get_match_info` uses 
+server (here, challenger solo/duo queue hosted on the european server). Then, in the section `Scrape matches`, I loop over all these nicknames to extract information about their most recent matches (approximately up to two years prior running the code). `get_match_ids` pulls the ids of these matches, and `get_match_info` uses 
 these ids to pull match information. 
