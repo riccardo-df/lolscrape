@@ -1,7 +1,8 @@
 # lolscrape
 
-R package to pull League of Legends data from the Riot's API.
+R package to pull League of Legends data from the Riot's API. Users need an API key to pull data from the servers. To get an API key, it is sufficient to have a Riot account of at least level 5 and visit [https://developer.riotgames.com/](https://developer.riotgames.com/). Once logged in, you can generate a key from your dashboard.
 
+ ## Installation  
 To install the package, run the following chunk of code in R:
 
 ```
@@ -9,6 +10,7 @@ To install the package, run the following chunk of code in R:
 devtools::install_github("riccardo-df/lolscrape")
 ```
 
+## Usage Examples
 A potential way to combine the functions in the package is as follows.
 
 ```
