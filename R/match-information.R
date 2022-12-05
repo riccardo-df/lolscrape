@@ -69,7 +69,10 @@ get_match_info <- function(region, match_id, api_key,
   if (!is.character(match_id)) stop("'match_ids' must be a charachter.", call. = FALSE)
   if (!is.character(api_key)) stop("'api_key' must be a charachter.", call. = FALSE)
 
-  if (region == "euw1") region_adjusted = "europe" ## RECODE ALSO OTHER REGIONS.
+  if (region == "euw1" | region == "eun1" | region == "ru" | region == "tr1") region_adjusted = "europe"
+  if (region == "br1" | region == "la1" | region == "la2" | region == "na1") region_adjusted = "americas"
+  if (region == "jp1" | region == "kr") region_adjusted = "asia"
+  if (region == "oc1") region_adjusted = "sea"
 
   sleep(min, max)
 
