@@ -68,7 +68,7 @@ To avoid clashes, set \code{min} and \code{max} so that the function waits a ran
 scraping the next item. To use a deterministic amount of second, set \code{min} and \code{max} to the same number.
 }
 \seealso{
-\code{\link{get_players_in_tier}}
+\code{\link{get_players_in_tier}}, \code{\link{get_match_ids}}
 }
 \author{
 Riccardo Di Francesco

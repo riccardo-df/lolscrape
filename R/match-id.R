@@ -49,7 +49,10 @@ get_match_ids <- function(region, summoner_name, api_key) {
   if (summoner$status_code == 403) stop("Your API key in invalid.", call. = FALSE)
 
   ## Get matches id.
-  if (region == "euw1") region = "europe" ## RECODE ALSO OTHER REGIONS.
+  if (region == "euw1" | region == "eun1" | region == "ru" | region == "tr1") region = "europe"
+  if (region == "br1" | region == "la1" | region == "la2" | region == "na1") region = "americas"
+  if (region == "jp1" | region == "kr") region = "asia"
+  if (region == "oc1") region = "sea"
 
   # We do not know how many pages. Iterate across several start points and stop if the last page is empty or if
   # if last iteration scraped the last ids.

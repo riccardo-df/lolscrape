@@ -33,7 +33,7 @@ To get an API key, it is sufficient to have a Riot account of at least level 5 a
 you can generate a key from your dashboard.\cr
 }
 \seealso{
-\code{\link{get_players_in_tier}}
+\code{\link{get_players_in_tier}}, \code{\link{get_match_info}}
 }
 \author{
 Riccardo Di Francesco
